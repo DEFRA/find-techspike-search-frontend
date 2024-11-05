@@ -1,6 +1,7 @@
-import { fetcher } from '~/src/server/common/helpers/fetch/index.js'
+import { proxyFetch } from '~/src/server/common/helpers/proxy.js'
 import { config } from '~/src/config/config.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
+import { log } from 'console'
 const logger = createLogger()
 
 const getContentUrls = async (filterFormat) => {
@@ -9,16 +10,17 @@ const getContentUrls = async (filterFormat) => {
   const searchEndpoint = `${config.get('searchApiEndpoint')}/search.json?filter_format=${filterFormat}`
   logger.info(`searchEndpoint': ${searchEndpoint}`)
 
-  const result = await fetcher(searchEndpoint)
+  const result = await proxyFetch(searchEndpoint, { method: 'GET' })
+  const data = await result?.json()
 
-  if (!result?.json) {
+  if (!data) {
     logger.error(
       'Failed to fetch search results for content urls or invalid response structure'
     )
     return {}
   }
 
-  return result.json.results.map((result) => {
+  return data.results.map((result) => {
     return {
       title: result.title,
       url: config.get('contentApiEndpoint') + result.link,
@@ -27,17 +29,4 @@ const getContentUrls = async (filterFormat) => {
   })
 }
 
-const getContent = async (url) => {
-  logger.info('Fetching content from Gov UK API')
-
-  const result = await fetcher(url)
-
-  if (!result?.json) {
-    logger.error('Failed to fetch content or invalid response structure')
-    return {}
-  }
-
-  return result?.json
-}
-
-export { getContentUrls, getContent }
+export { getContentUrls }

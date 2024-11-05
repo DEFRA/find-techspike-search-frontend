@@ -33,7 +33,7 @@ const homeControllerPost = {
     const searchResults = await getSearchResults(search)
 
     if (searchResults?.results) {
-      searchResults.results.forEach(result => {
+      searchResults.results.forEach((result) => {
         if (result.public_timestamp) {
           const date = new Date(result.public_timestamp)
           result.public_timestamp = date.toLocaleDateString('en-GB')
