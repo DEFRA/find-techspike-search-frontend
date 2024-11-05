@@ -1,19 +1,19 @@
-import { aboutController } from '~/src/server/about/controller.js'
+import { contentDetailController } from '~/src/server/content-detail/controller.js'
 
 /**
  * Sets up the routes used in the /about page.
  * These routes are registered in src/server/router.js.
  * @satisfies {ServerRegisterPluginObject<void>}
  */
-export const about = {
+export const contentDetail = {
   plugin: {
-    name: 'about',
+    name: 'content-detail',
     register(server) {
       server.route([
         {
           method: 'GET',
-          path: '/about',
-          ...aboutController
+          path: '/content-detail',
+          ...contentDetailController
         }
       ])
     }

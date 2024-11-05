@@ -1,13 +1,8 @@
-import { homeController } from '~/src/server/home/controller.js'
+import {
+  homeControllerGet,
+  homeControllerPost
+} from '~/src/server/home/controller.js'
 
-/**
- * Sets up the routes used in the home page.
- * These routes are registered in src/server/router.js.
- */
-
-/**
- * @satisfies {ServerRegisterPluginObject<void>}
- */
 export const home = {
   plugin: {
     name: 'home',
@@ -16,13 +11,14 @@ export const home = {
         {
           method: 'GET',
           path: '/',
-          ...homeController
+          ...homeControllerGet
+        },
+        {
+          method: 'POST',
+          path: '/',
+          ...homeControllerPost
         }
       ])
     }
   }
 }
-
-/**
- * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */

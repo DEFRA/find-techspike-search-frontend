@@ -150,6 +150,18 @@ export const config = convict({
       }
     }
   },
+  searchApiEndpoint: {
+    doc: 'Gov UK Search endpoint',
+    format: String,
+    default: 'https://www.gov.uk/api',
+    env: 'SEARCH_API_ENDPOINT'
+  },
+  contentApiEndpoint: {
+    doc: 'Gov UK content endpoint',
+    format: String,
+    default: 'https://www.gov.uk/api/content',
+    env: 'CONTENT_API_ENDPOINT'
+  },
   redis: /** @type {Schema<RedisConfig>} */ ({
     host: {
       doc: 'Redis cache host',

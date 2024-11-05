@@ -4,14 +4,14 @@
 export function buildNavigation(request) {
   return [
     {
-      text: 'Home',
+      text: 'Search',
       url: '/',
       isActive: request?.path === '/'
     },
     {
-      text: 'About',
-      url: '/about',
-      isActive: request?.path === '/about'
+      text: 'Content',
+      url: '/content',
+      isActive: request?.path === '/content'
     }
   ]
 }

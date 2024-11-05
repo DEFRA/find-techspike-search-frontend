@@ -1,0 +1,53 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-body" data-testid="app-page-body">
+        <p><a href="{{ link }}">{{content.title}}</a></p>
+        <p>{{ content.description }}</p>
+        <p><strong>Base path:</strong> {{ content.base_path }}</p>
+        <p><strong>Document type</strong> {{ content.document_type }}</p>
+        <p><strong>Updated at:</strong> {{ content.updated_at }}</p>
+        <p><strong>Change history:</strong></p>
+        <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+          {% for changeHistory in content.details.change_history %}
+            <li>
+              {{ changeHistory.note }} ({{ changeHistory.public_timestamp }})
+            </li>
+          {% endfor %}
+        </ul>
+        <p><strong>Document type:</strong> {{ content.document_type }}</p>
+        <p><strong>First published at:</strong> {{ content.first_published_at }}</p>
+        <p><strong>Phase:</strong> {{ content.phase }}</p>
+        <p><strong>public updated at:</strong> {{ content.public_updated_at }}</p>
+        <p><strong>Publishing app :</strong> {{ content.publishing_app }}</p>
+        <p><strong>Finder facets:</strong></p>
+        <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+          {% for finder in content.links.finder %}
+            <li>
+              {{ finder.base_path }}
+              <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+                {% for facet in finder.details.facets %}
+                  <li><strong>{{ facet.name }}</strong></li>
+                  <ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+                    {% for allowedValues in facet.allowed_values %}
+                      <li>{{ allowedValues.value }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+        <p><strong>Body:</strong></p>
+        <p>{{ content.details.body | safe }}</p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
