@@ -1,7 +1,6 @@
 import { proxyFetch } from '~/src/server/common/helpers/proxy.js'
 import { config } from '~/src/config/config.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
-import { log } from 'console'
 const logger = createLogger()
 
 const getContentUrls = async (filterFormat) => {

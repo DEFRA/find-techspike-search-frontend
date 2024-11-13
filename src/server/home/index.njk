@@ -25,7 +25,10 @@
         <hr />
         {% for search in searchResults %}
           <p>
-            <a href="http://gov.uk{{search.link}}">{{ search.display_type }}: {{ search.title }}</a>
+            <a href="/content-detail?link={{search.link}}">
+             {% if search.display_type %}{{ search.display_type }}: {% endif %}
+             {{ search.title }}
+            </a>
             <p>
               {{ search.description }}
             </p>
